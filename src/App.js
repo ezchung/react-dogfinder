@@ -1,10 +1,29 @@
+import React, { useState } from "react";
+import { BrowserRouter, Navigate, useNavigate, Routes, Route } from "react-router-dom";
+import Nav from "./Nav";
+import axios from "axios"
+import DogList from "./DogList";
+import NotFound from "./NotFound";
+import DogDetails from "./DogDetails";
+
 import './App.css';
 
-function App() {
+/**
+ * 
+ * @param {*} param0 
+ * @returns 
+ */
+function App({dogs}) {
+
   return (
     <div className="App">
-      <h1>React Dogfinder</h1>
-      
+        <h1>React Dogfinder</h1>
+        <Nav dogs={dogs}/>
+        <Routes>
+          <Route path="/dogs" element={<DogList dogs={dogs}/>}></Route>
+          <Route path="/dogs/:name" element={<DogDetails dogs={dogs}/>}></Route>
+          <Route path="*" element={<Navigate to="/dogs" />}></Route>
+        </Routes>
     </div>
   );
 }

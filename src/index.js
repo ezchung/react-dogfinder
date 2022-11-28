@@ -3,11 +3,20 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
+import axios from 'axios';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-    <App />
-);
+axios.get("http://localhost:5001/dogs")
+    .then(resp => {
+        const dogs = resp.data;
+        root.render(
+            <BrowserRouter>
+                <App dogs={dogs}/>
+            </BrowserRouter>
+        );
+    });
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
