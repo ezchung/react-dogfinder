@@ -21,7 +21,12 @@ function App({dogs}) {
         <Nav dogs={dogs}/>
         <Routes>
           <Route path="/dogs" element={<DogList dogs={dogs}/>}></Route>
-          <Route path="/dogs/:name" element={<DogDetails dogs={dogs}/>}></Route>
+          {dogs.map(dog => (
+            <Route path={`/dogs/${dog.name}`} key={dog.name}
+                   element={<DogDetails dog={dog}/>}>
+            </Route>
+            )
+          )}
           <Route path="*" element={<Navigate to="/dogs" />}></Route>
         </Routes>
     </div>

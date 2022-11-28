@@ -7,9 +7,9 @@ import { useParams } from "react-router-dom";
  * @param {*} param0 
  * @returns 
  */
-function DogDetails({ dogs }){
-    const { name } = useParams();
-    const dog = dogs.find(dog => dog.name === name);
+function DogDetails({ dog }){
+    // const { name } = useParams();
+    // const dog = dogs.find(dog => dog.name === name);
 
 
     return (
