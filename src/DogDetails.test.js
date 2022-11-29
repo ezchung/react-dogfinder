@@ -3,35 +3,42 @@ import { MemoryRouter } from "react-router-dom";
 import DogDetails from "./DogDetails";
 
 it("works", function () {
+  const dog = {
+    name: "test",
+    age: 5,
+    src: "test",
+    facts: [
+      "test loves eating popcorn.",
+      "test is a terrible guard dog.",
+      "test wants to cuddle with you!",
+    ],
+  };
   render(
     <MemoryRouter>
-      <DogDetails />
+      <DogDetails dog={dog} />
     </MemoryRouter>
   );
 });
 
 it("should render a dog", function () {
+  const dog = {
+    name: "test",
+    age: 5,
+    src: "test",
+    facts: [
+      "test loves eating popcorn.",
+      "test is a terrible guard dog.",
+      "test wants to cuddle with you!",
+    ],
+  };
   const { getByText } = render(
     <MemoryRouter>
-      <DogDetails
-        dog={{
-          name: "Whiskey",
-          age: 5,
-          src: "whiskey",
-          facts: [
-            "Whiskey loves eating popcorn.",
-            "Whiskey is a terrible guard dog.",
-            "Whiskey wants to cuddle with you!",
-          ],
-        }}
-      />
+      <DogDetails dog={dog} />
     </MemoryRouter>
   );
 
   const fact = getByText(
-    /Facts : Whiskey loves eating popcorn.,Whiskey is a terrible guard dog.,/i
+    /Facts : test loves eating popcorn.,test is a terrible guard dog.,/i
   );
   expect(fact).toBeInTheDocument();
-
-  expect(<img src="whiskey.jpg" alt="whiskey"></img>).toBeInTheDocument();
 });

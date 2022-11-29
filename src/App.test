@@ -1,10 +1,14 @@
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, MemoryRouter } from "react-router-dom";
 import DogDetails from "./DogDetails";
 import { render, screen, waitFor } from "@testing-library/react";
 
-Router.useParams = jest.fn();
+// Router.useParams = jest.fn();
 
 test("renders learn react link", () => {
-  Router.useParams.mockReturnValue({ a: "b" });
-  render(<DogDetails />);
+  // Router.useParams.mockReturnValue({ a: "b" });
+  // render(
+  //   <MemoryRouter>
+  //     <DogDetails />
+  //   </MemoryRouter>
+  // );
 });

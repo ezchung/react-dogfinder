@@ -1,0 +1,28 @@
+import { BrowserRouter as Router, MemoryRouter } from "react-router-dom";
+import DogDetails from "./DogDetails";
+import { render, screen, waitFor } from "@testing-library/react";
+import DogData from "./DogData";
+
+Router.useParams = jest.fn();
+
+// jest.mock("react-router-dom", () => ({
+//   ...jest.requireActual("react-router-dom"),
+//   useParams: () => ({ name: "Whiskey" }),
+// }));
+
+it("works", function () {
+  // Router.useParams.mockReturnValue({ name: "Whiskey" });
+
+  const { debug, getByText, container } = render(
+    <MemoryRouter>
+      <DogData dogs={[]} />
+    </MemoryRouter>
+  );
+
+  // debug(container);
+
+  // const fact = getByText(
+  //   /Facts : Whiskey loves eating popcorn.,Whiskey is a terrible guard dog.,/i
+  // );
+  // expect(fact).toBeInTheDocument();
+});

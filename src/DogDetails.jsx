@@ -10,9 +10,7 @@ import { useParams, Link } from "react-router-dom";
  *
  * App -> DogDetails
  */
-function DogDetails({
-  dog = { name: "Whisky", src: "whisky", age: 5, facts: [] },
-}) {
+function DogDetails({ dog }) {
   // const { name } = useParams();
   // const dog = dogs.find(dog => dog.name === name);
 
