@@ -1,22 +1,23 @@
 import React from "react";
+import DogDetails from "./DogDetails";
 
 /**
- * 
- * @param {*} param0 
- * @returns 
+ * DogList:
+ *
+ * Props: dogs - a list of dogs, like {name: "Whisky", src: 'whisky', age: 5, facts: [...]}[]
+ *
+ * State:
+ *
+ * App -> DogList
  */
-function DogList({dogs}){
-    return (
-        <div className="Nav">
-            {dogs.map(dog =>
-                <div className="dog" key={dog.name} >
-                    <h2>{dog.name}</h2>
-                    <img src={`/${dog.name.toLowerCase()}.jpg`} 
-                        alt={dog.name}></img>
-                </div>
-            )}
-        </div>
-    )
+function DogList({ dogs }) {
+  return (
+    <div className="Nav">
+      {dogs.map((dog) => (
+        <DogDetails key={dog.name} dog={dog} />
+      ))}
+    </div>
+  );
 }
 
 export default DogList;

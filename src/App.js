@@ -1,34 +1,56 @@
 import React, { useState } from "react";
-import { BrowserRouter, Navigate, useNavigate, Routes, Route } from "react-router-dom";
+import {
+  Navigate,
+  Routes,
+  Route,
+  BrowserRouter,
+  Router,
+} from "react-router-dom";
 import Nav from "./Nav";
-import axios from "axios"
+import axios from "axios";
 import DogList from "./DogList";
-import NotFound from "./NotFound";
-import DogDetails from "./DogDetails";
+import DogData from "./DogData";
 
-import './App.css';
+import "./App.css";
 
 /**
- * 
- * @param {*} param0 
- * @returns 
+ * App:
+ *
+ * Props:
+ *
+ * State: dogs - a list of dogs, like {name: "Whisky", src: 'whisky', age: 5, facts: [...]}[]
+ *
+ * App -> { Nav, Route }
  */
-function App({dogs}) {
+function App() {
+  const [dogs, setDogs] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  if (isLoading === true) {
+    getDogs();
+    return <div>Loading ...</div>;
+  }
+
+  /**Get all the dogs from the db */
+  async function getDogs() {
+    const { data } = await axios.get("http://localhost:5001/dogs");
+    setDogs(data);
+    setIsLoading(false);
+  }
 
   return (
     <div className="App">
-        <h1>React Dogfinder</h1>
-        <Nav dogs={dogs}/>
-        <Routes>
-          <Route path="/dogs" element={<DogList dogs={dogs}/>}></Route>
-          {dogs.map(dog => (
-            <Route path={`/dogs/${dog.name}`} key={dog.name}
-                   element={<DogDetails dog={dog}/>}>
-            </Route>
-            )
-          )}
-          <Route path="*" element={<Navigate to="/dogs" />}></Route>
-        </Routes>
+      <h1>React Dogfinder</h1>
+      <BrowserRouter>
+        <Router>
+          <Nav dogs={dogs} />
+          <Routes>
+            <Route path="/dogs" element={<DogList dogs={dogs} />}></Route>
+            <Route path="/dogs/:name" element={<DogData dogs={dogs} />}></Route>
+            <Route path="*" element={<Navigate to="/dogs" />}></Route>
+          </Routes>
+        </Router>
+      </BrowserRouter>
     </div>
   );
 }
